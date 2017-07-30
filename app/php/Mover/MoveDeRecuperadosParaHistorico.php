@@ -4,6 +4,7 @@ include("config.php");
 
 $id = $_COOKIE['cookieIDrecovered'];
 $idticket = $_COOKIE['cookieID'];
+
 $myparams['id'] = $id;
 $myparams['idticket'] = $idticket;
 

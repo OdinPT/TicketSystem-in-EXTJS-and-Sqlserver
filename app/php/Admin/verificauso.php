@@ -7,7 +7,7 @@ $IDFuncEstadox = $_COOKIE['cookieEmail'];
 $myparams['id'] = $id;
 $myparams['IDFuncEstadox'] = $IDFuncEstadox;
 
-/*echo("id: ");
+echo("id: ");
 echo $id;
 echo("</br>");
 echo("Estado: ");
@@ -18,7 +18,7 @@ echo("</br>");
 echo("Funcionario atribuido: ");
 echo $func;
 echo("</br>");
-*/
+
 
 $sql = "SELECT * FROM emails.emails WHERE id='$id'";
 
@@ -62,17 +62,14 @@ if($state == 1)
     if($func == $IDFuncEstadox)
          {
             $sql2 = "{call emails.inserirhistoricoestados(?,?,?)}";
-             echo "Sucesso";
+             //echo "Sucesso";
                 $stmt = sqlsrv_prepare($connection, $sql2, $params);
 
                 if( sqlsrv_execute( $stmt ) === false ) {
                           die( print_r( sqlsrv_errors(), true));
                 }
-
                 $row = sqlsrv_fetch_array($stmt);
                 echo "Sucesso";
-                                 //   echo("==> inserir");
-
          }
          else if($tipo == 3)
             {

@@ -6,9 +6,8 @@ $id = $_COOKIE['cookieIDhistorico'];
 $myparams['id'] = $id;
 
 $params = array(
-                     array(&$myparams['id'], SQLSRV_PARAM_IN)
-                   );
-
+               array(&$myparams['id'], SQLSRV_PARAM_IN)
+);
 $sql = "{call emails.MudaEstado(?)}";
 
                    $stmt = sqlsrv_prepare($connection, $sql, $params);

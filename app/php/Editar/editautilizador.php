@@ -1,7 +1,9 @@
 <?php
 include("config.php");
 $id = $_COOKIE['cookieIDfuncionario'];
-$myparams['id'] = $id;
+
+//$myparams[id] = $id;
+
 $username = $_POST['user'];
 $password = $_POST['pass'];
 $id_departamento = $_POST['id_departamento'];
@@ -14,11 +16,12 @@ $myparams['id_departamento'] = $id_departamento;
 $myparams['tipo_funcionario'] = $tipo_funcionario;
 
 $params = array(
-                     array(&$myparams['id'], SQLSRV_PARAM_IN),
+
                      array(&$myparams['username'], SQLSRV_PARAM_IN),
                      array(&$myparams['password'], SQLSRV_PARAM_IN),
                      array(&$myparams['id_departamento'], SQLSRV_PARAM_IN),
-                     array(&$myparams['tipo_funcionario'], SQLSRV_PARAM_IN)
+                     array(&$myparams['tipo_funcionario'], SQLSRV_PARAM_IN),
+                     array(&$myparams['id'], SQLSRV_PARAM_IN)
                    );
 
 $sql = "{call emails.AtualizaFuncionario(?,?,?,?,?)}";
