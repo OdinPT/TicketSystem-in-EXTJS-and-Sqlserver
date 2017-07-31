@@ -6,12 +6,15 @@ $IdTicketEstado = $_COOKIE['cookieID'];
 $IDEDep = $_POST['id_departamento'];
 $IDFuncEstado =  $_COOKIE['cookieEmail'];
 
+
+
+
 $myparams['IdTicketEstado'] = $IdTicketEstado;
 $myparams['IDEDep'] = $IDEDep;
 $myparams['IDFuncEstado'] = $IDFuncEstado;
 
 $params = array(
-                     array(&$myparams['IdTicketEstad'], SQLSRV_PARAM_IN),
+                     array(&$myparams['IdTicketEstado'], SQLSRV_PARAM_IN),
                      array(&$myparams['IDEDep'], SQLSRV_PARAM_IN),
                      array(&$myparams['IDFuncEstado'], SQLSRV_PARAM_IN)
                    );

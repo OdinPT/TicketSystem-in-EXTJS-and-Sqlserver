@@ -31,7 +31,7 @@ Ext.define('TrackIT.view.main.tickets.ListaTickets', {
     }],
 
     columns: [
-        {text: 'ID ',  dataIndex: 'id', flex: 0.10,filter: {
+        {text: 'ID ',  dataIndex: 'id', flex: 0.90,filter: {
             type: 'string'
         }},
         { text: 'Remetente',  dataIndex: 'fromaddress', flex: 1.6,
