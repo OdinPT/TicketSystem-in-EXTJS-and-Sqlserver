@@ -6,8 +6,6 @@ $password = $_POST['pass'];
 $id_departamento = $_POST['id_departamento'];
 $tipo_funcionario = $_POST['tipo_funcionario'];
 
-        echo("teste");
-
 $myparams['username'] = $username;
 $myparams['password'] = $password;
 

@@ -6,8 +6,8 @@ $return_arr = array();
 $id = $_COOKIE['cookieID'];
 $myparams['id'] = $id;
 $params = array(
-                                 array(&$myparams['id'], SQLSRV_PARAM_IN)
-                               );
+          array(&$myparams['id'], SQLSRV_PARAM_IN));
+
 $sql = "{call emails.VerHistoricoDepartamento(?)}";
 $stmt = sqlsrv_prepare($connection, $sql, $params);
 
@@ -18,6 +18,7 @@ die( print_r( sqlsrv_errors(), true) );
 }
 
 while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+
 $row_array['idHistoricoDep'] = $row['idHistoricoDep'];
 $row_array['IdTicketDep'] = $row['IdTicketDep'];
 $row_array['HoraAtribuicaoDep'] = $row['HoraAtribuicaoDep'];
