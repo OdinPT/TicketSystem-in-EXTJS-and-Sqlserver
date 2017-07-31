@@ -1,21 +1,25 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 include("config.php");
 
 $IdTicketEstado = $_COOKIE['cookieID'];
-$IdTipoRes = $_POST['IdTipoRes'];
 $IDFuncEstadox =  $_COOKIE['cookieEmail'];
+$IdTipoRes = $_POST['IdTipoRes'];
 
-$myparams['IdTicketEstado'] = $IDFuncEstadox;
-$myparams['IdTipoRes'] = $IDFuncEstadox;
+//echo($IdTicketEstado);
+//echo($IDFuncEstadox);
+
+
+$myparams['IdTicketEstado'] = $IdTicketEstado;
 $myparams['IDFuncEstadox'] = $IDFuncEstadox;
+$myparams['IdTipoRes'] = $IdTipoRes;
 
 $params = array(
-                     array(&$myparams['IdTicketEstado'], SQLSRV_PARAM_IN),
-                     array(&$myparams['IdTipoRes'], SQLSRV_PARAM_IN),
-                     array(&$myparams['IDFuncEstadox'], SQLSRV_PARAM_IN)
+                     array(&$myparams['IdTicketEstado'], SQLSRV_PARAM_IN),//int
+                     array(&$myparams['IDFuncEstadox'], SQLSRV_PARAM_IN),//varchar
+                     array(&$myparams['IdTipoRes'], SQLSRV_PARAM_IN) //int
                    );
-
+//int varchar int
 $sql = "{call emails.inserirhistoricoestados2(?,?,?)}";
 
                    $stmt = sqlsrv_prepare($connection, $sql, $params);

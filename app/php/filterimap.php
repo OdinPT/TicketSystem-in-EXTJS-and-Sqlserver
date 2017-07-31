@@ -4,23 +4,25 @@ include_once("config.php");
 //getting id from url
 
 $cookieEmail = $_COOKIE['cookieEmail'];
+$myparams['cookieEmail'] = $cookieEmail;
+
 //echo($cookieEmail);
-//$myparams['cookieEmail'] = $cookieEmail;
 
 $sql = "SELECT * FROM emails.funcionario WHERE username='$cookieEmail'";
 
 $stmt = sqlsrv_prepare($connection, $sql);
-
 $stmt = sqlsrv_query($connection, $sql);
 
 if( $stmt === false) {
-    echo(Erro1);
+        echo('===> if Erro 1 <===== ');
     die( print_r( sqlsrv_errors(), true) );
 }
 
-while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-$iddepartamento = $row['id_departamento_funcionarios'];
+while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) )
+{
+    $iddepartamento = $row['id_departamento_funcionarios'];
 }
+
 $quatro = 4;
 $myparams['quatro'] = $quatro;
 $myparams['iddepartamento'] = $iddepartamento;
@@ -28,12 +30,12 @@ $myparams['iddepartamento'] = $iddepartamento;
 $sql2 = "SELECT * FROM emails.funcionario WHERE Tipo_Funcionario=$quatro AND id_departamento_funcionarios=$iddepartamento";
 
 $stmt2 = sqlsrv_prepare($connection, $sql2);
-
 $stmt2 = sqlsrv_query( $connection, $sql2);
 
-while( $row2 = sqlsrv_fetch_array( $stmt2, SQLSRV_FETCH_ASSOC) ) {
-$username = $row2['username'];
-  $password = $row2['pass'];
+while( $row2 = sqlsrv_fetch_array( $stmt2, SQLSRV_FETCH_ASSOC) )
+{
+    $username = $row2['username'];
+    $password = $row2['pass'];
 }
 
 /* try to connect */
@@ -92,7 +94,8 @@ if($emails) {
         $message = strip_tags($message);
         $message = html_entity_decode($message);
         $message = htmlspecialchars($message);
-    echo $message;
+
+            echo $message;
 
     //$conn= sqlsrv_connect("localhost","root","","emails");
 
@@ -110,18 +113,28 @@ if($emails) {
                                      array(&$myparams['cookieEmail'], SQLSRV_PARAM_IN)
                                    );
 
-    $sql3 = "{call emails.InserirTickets2(?,?,?,?,?)}";
-                $stmt3 = sqlsrv_prepare($connection, $sql3, $params3);
+    $sql3 = "{call emails.InserirTickets2(?,?,?,?,? )}";
+
+      $stmt3 = sqlsrv_prepare($connection, $sql3, $params3);
+      $stmt3 = sqlsrv_query($connection, $sql3, $params3);
+
+
+
+
+    /*$stmt3 = sqlsrv_prepare($connection, $sql3, $params3);
 
                 if( sqlsrv_execute( $stmt3 ) === false ) {
+                    echo('</br> Morreu aqui</br>');
+
                           die( print_r( sqlsrv_errors(), true));
                 }
 
                 $row3 = sqlsrv_fetch_array($stmt3);
 	    sqlsrv_close($connection);
-
+    */
   }
 }
+
 
 /* close the connection */
 imap_close($inbox);

@@ -18,6 +18,8 @@ Ext.define('TrackIT.view.admin.FormRegistaHisEstadoController', {
                         }, 1300);
                     }
                     hide_message();
+
+
                 },
 
 
@@ -26,13 +28,8 @@ Ext.define('TrackIT.view.admin.FormRegistaHisEstadoController', {
                     alert('Erro...');
                 },
                 params: {
-
                     IdTipoRes: Ext.getCmp('IdTipoRes').getValue()
-
                 }
-
-
-
             })
     }
 

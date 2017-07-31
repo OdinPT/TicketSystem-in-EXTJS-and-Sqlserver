@@ -95,14 +95,14 @@ Ext.define('TrackIT.view.main.tickets.ListaTickets', {
         items: [
             {
                 text: 'Atualizar',
-                handler: function() {
+                handler: function () {
                     Ext.MessageBox.wait('A carregar tickets...');
                     myRequest = Ext.Ajax.request({
                         url: 'app/php/filterimap.php',
                         method: 'POST',
 
-                        loadMask:true,
-                        success: function(response, opts) {
+                        loadMask: true,
+                        success: function (response, opts) {
                             Ext.MessageBox.updateProgress(1);
                             Ext.MessageBox.hide();
                             var grid = Ext.ComponentQuery.query('gridticket')[0]
