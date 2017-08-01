@@ -1,5 +1,5 @@
 ﻿﻿<?php
-error_reporting(0);
+//error_reporting(0);
 
 require 'class.smtp.php';
 require 'class.phpmailer.php';
@@ -7,14 +7,23 @@ require 'config.php';
 
 $assunto = $_POST['assuntoresposta'];
 $conteudo = $_POST['conteudoresposta'];
+
+$myparams['assunto'] = $assunto;
+$myparams['conteudo'] = $conteudo;
+
 $cookieEmail = $_COOKIE['cookieEmail'];
 $id = $_COOKIE['cookieID'];
+
+$myparams['cookieEmail'] = $cookieEmail;
+$myparams['id'] = $id;
+
 //$IDFuncEstadox = $_COOKIE['cookieEmail'];
 
 $fileName = $_FILES['anexo']['name'];
 $tmpName  = $_FILES['anexo']['tmp_name'];
 $fileSize = $_FILES['anexo']['size'];
 $fileType = $_FILES['anexo']['type'];
+
 $fp= fopen($tmpName, 'r');
     $content = fread($fp, filesize($tmpName));
     $content = addslashes($content);
@@ -23,35 +32,33 @@ $fp= fopen($tmpName, 'r');
         $fileName = addslashes($fileName);
     }
 
-$result = sqlsrv_query($mysqli, "SELECT * FROM funcionario WHERE username='$cookieEmail'") or die(sqlsrv_error($mysqli));
+$sql = "SELECT * FROM emails.funcionario WHERE username='$cookieEmail'";
 
-while($res = sqlsrv_fetch_array($result))
-//$result = mysqli_query($mysqli, "SELECT * FROM funcionario WHERE username='$cookieEmail'") or die(mysqli_error($mysqli));
-//while($res = mysqli_fetch_array($result))
-{
-  $departamento = $res['id_departamento_funcionarios'];
+$stmt = sqlsrv_query( $connection, $sql );
+
+if( $stmt === false) {
+    echo ("if 1");
+    die( print_r( sqlsrv_errors(), true) );
 }
-//selecting data associated with this particular id
-
-$result = sqlsrv_query($mysqli, "SELECT * FROM funcionario WHERE id_departamento_funcionarios='$departamento' AND Tipo_Funcionario=4") or die(sqlsrv_error($mysqli));
-
-//$result = mysqli_query($mysqli, "SELECT * FROM funcionario WHERE id_departamento_funcionarios='$departamento' AND Tipo_Funcionario=4") or die(mysqli_error($mysqli));
-
-while($res = sqlsrv_fetch_array($result))
-{
-  $username = $res['username'];
-  $password = $res['pass'];
+while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+    $departamento = $row['id_departamento_funcionarios'];
 }
 
-$result = sqlsrv_query($mysqli, "SELECT * FROM emails WHERE id='$id'") or die(sqlsrv_error($mysqli));
+$sql2 = "SELECT * FROM emails.funcionario WHERE id_departamento_funcionarios='$departamento' AND Tipo_Funcionario=4";
 
+$stmt2 = sqlsrv_query( $connection, $sql2 );
 
-while($res = sqlsrv_fetch_array($result))
-//$result = mysqli_query($mysqli, "SELECT * FROM emails WHERE id='$id'") or die(mysqli_error($mysqli));
-//while($res = mysqli_fetch_array($result))
-{
-    $sender = $res['fromaddress'];
+if( $stmt2 === false) {
+    echo ("if 2");
+    die( print_r( sqlsrv_errors(), true) );
 }
+
+
+while( $row = sqlsrv_fetch_array( $stmt2, SQLSRV_FETCH_ASSOC) ) {
+    $username = $row['username'];
+    $password = $row['pass'];
+}
+
 $PHPMailer = new PHPMailer();
 
 // define que será usado SMTP
@@ -79,6 +86,7 @@ $PHPMailer->From = $username;
 $PHPMailer->FromName = 'TrackIT';
 $conteudo2 = $conteudo;
 // assunto da mensagem
+
 $PHPMailer->Subject = $assunto;
 
 $conteudo = str_replace('%conteudo2%', $conteudo2, file_get_contents('action.html'));
@@ -93,27 +101,72 @@ $cookieID = $_COOKIE['cookieID'];
 //selecting data associated with this particular id
 //$result = mysqli_query($mysqli, "SELECT * FROM emails WHERE id='$cookieID'") or die(mysqli_error($mysqli));
 
-$result = sqlsrv_query($mysqli, "SELECT * FROM emails WHERE id='$cookieID'") or die(sqlsrv_error($mysqli));
-while($res = sqlsrv_fetch_array($result))
-{
-  $fromaddress = $res['email'];
+$sql4 = "SELECT * FROM emails.emails WHERE id='$cookieID'";
+
+
+$stmt4 = sqlsrv_prepare($connection, $sql4);
+$stmt4 = sqlsrv_query($connection, $sql4);
+
+if( $stmt4 === false) {
+    echo("erro stmt 4");
+    die( print_r( sqlsrv_errors(), true) );
 }
-//echo $fromaddress;
+
+while( $row = sqlsrv_fetch_array( $stmt4, SQLSRV_FETCH_ASSOC) ) {
+    $fromaddress = $row['email'];
+}
+echo $fromaddress;
 
 // adiciona destinatário (pode ser chamado inúmeras vezes)
 $PHPMailer->AddReplyTo($fromaddress, 'Nome do visitante');
 $PHPMailer->AddAddress($fromaddress);
 $PHPMailer->addAttachment($tmpName, $fileName);
 
-sqlsrv_query($mysqli, "call InserirRespostas('$assunto', '$conteudo2','$id')");
-sqlsrv_query($mysqli, "call inserirhistoricoestados('$id',2,'$cookieEmail')");
-sqlsrv_close($mysqli);
+//sqlsrv_query($mysqli, "call InserirRespostas('$assunto', '$conteudo2','$id')");
+$myparams['conteudo'] = $conteudo;
 
-mysqli_query($mysqli, "call InserirRespostas('$assunto', '$conteudo2','$id')");
-mysqli_query($mysqli, "call inserirhistoricoestados('$id',2,'$cookieEmail')");
+    //sqlsrv_query($mysqli, "call inserirhistoricoestados('$id',2,'$cookieEmail')");
 
-mysqli_close($mysqli);
+$dois=2;
+$myparams['dois'] = $dois;
+$myparams['id'] = $id;
+$myparams['email'] = $cookieEmail;
 
+$paramx2 = array(
+        array(&$myparams['id'], SQLSRV_PARAM_IN),
+        array(&$myparams['dois'], SQLSRV_PARAM_IN),
+        array(&$myparams['email'], SQLSRV_PARAM_IN)
+);
+
+$sqlx2 = "{call emails.inserirhistoricoestados(?,?,?)}";
+
+$stmt23 = sqlsrv_prepare($connection, $sqlx2, $paramx2);
+$stmt23 = sqlsrv_query($connection, $sqlx2, $paramx2);
+
+$row = sqlsrv_fetch_array($stmtx2);
+
+// mysqli_query($mysqli, "call InserirRespostas('$assunto', '$conteudo2','$id')");
+$myparams['conteudo2'] = $conteudo2;
+
+$paramx3 = array(
+    array(&$myparams['assunto'], SQLSRV_PARAM_IN),
+    array(&$myparams['conteudo2'], SQLSRV_PARAM_IN),
+    array(&$myparams['id'], SQLSRV_PARAM_IN)
+
+);
+
+$sqlx3 = "{call emails.InserirRespostas(?,?,?)}";
+
+$stmtx3 = sqlsrv_prepare($connection, $sqlx3, $paramx3);
+
+if( sqlsrv_execute( $stmtx3 ) === false ) {
+    echo("ERro  INSERIR Respostas");
+    die( print_r( sqlsrv_errors(), true));
+}
+
+$row = sqlsrv_fetch_array($stmtx3);
+
+//mysqli_query($mysqli, "call inserirhistoricoestados('$id',2,'$cookieEmail')");
 // verifica se enviou corretamente
 
 if ( $PHPMailer->Send())
@@ -124,6 +177,5 @@ else
 {
 echo 'Erro do PHPMailer: ' . $PHPMailer->ErrorInfo;
 }
-
 
 ?>

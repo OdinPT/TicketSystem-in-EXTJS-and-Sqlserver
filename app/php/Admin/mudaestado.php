@@ -6,14 +6,6 @@ include("config.php");
 $id = $_COOKIE['cookieID'];
 $IDFuncEstadox = $_COOKIE['cookieEmail'];
 
-/*
-echo('id: ');
-echo($id);
-echo('</br>');
-echo($IDFuncEstadox);
-echo('</br>');
-*/
-
 $dois = 2;
 $myparams['id'] = $id;
 $myparams['id_funcionario'] = $IDFuncEstadox;
@@ -21,14 +13,14 @@ $myparams['dois'] = $dois;
 
 $sql = "SELECT * FROM emails.emails WHERE id='$id'";
 
-//    $stmt2 = sqlsrv_prepare($connection, $sql);
+     //$stmt2 = sqlsrv_prepare($connection, $sql);
     //$stmt2 = sqlsrv_execute( $connection, $sql);
 
 $stm2t = sqlsrv_prepare($connection, $sql);
 $stmt2 = sqlsrv_query($connection, $sql);
 
 if( $stmt2 === false) {
-    echo(Erro1);
+    echo("Erro1");
     die( print_r( sqlsrv_errors(), true) );
 }
 

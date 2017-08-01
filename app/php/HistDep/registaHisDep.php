@@ -6,9 +6,6 @@ $IdTicketEstado = $_COOKIE['cookieID'];
 $IDEDep = $_POST['id_departamento'];
 $IDFuncEstado =  $_COOKIE['cookieEmail'];
 
-
-
-
 $myparams['IdTicketEstado'] = $IdTicketEstado;
 $myparams['IDEDep'] = $IDEDep;
 $myparams['IDFuncEstado'] = $IDFuncEstado;

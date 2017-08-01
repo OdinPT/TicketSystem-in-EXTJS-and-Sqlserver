@@ -1,23 +1,14 @@
 <?php
-/*
-// mysql_connect("database-host", "username", "password")
-$conn = mysql_connect("localhost","root","root")
-			or die("cannot connected");
+error_reporting(0);
 
-// mysql_select_db("database-name", "connection-link-identifier")
-@mysql_select_db("test",$conn);
-*/
+$serverName = "FENIX\SQLNOTEWINDOWS10";
+$connectionInfo = array( "Database" => "TRAKTICKETSYS", "UID"=>"sa", "PWD"=>"1234" );
+$connection = sqlsrv_connect($serverName, $connectionInfo);
 
-/**
- * mysql_connect is deprecated
- * using mysqli_connect instead
- */
-
-$databaseHost = 'localhost';
-$databaseName = 'emails';
-$databaseUsername = 'root';
-$databasePassword = '';
-
-$mysqli = sqlsrv_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
-
+if( $connection ) {
+    //echo "Connection established.<br />";
+} else{
+    echo "Connection could not be established.<br />";
+    die( print_r( sqlsrv_errors(), true ) );
+}
 ?>
