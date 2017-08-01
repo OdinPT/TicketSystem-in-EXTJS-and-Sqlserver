@@ -79,6 +79,13 @@ Ext.define('TrackIT.view.main.tickets.enviaemail.FormEnviaEmail', {
                                 email: Ext.getCmp('email').getValue()
                         }});
                         Ext.MessageBox.alert('Sucesso','Enviado!');
+
+                        function hide_message() {
+                            Ext.defer(function() {
+                                Ext.MessageBox.hide();
+                            }, 2300);
+                        }
+                        hide_message();
                         }
                     }
         ]
