@@ -1,23 +1,20 @@
 ﻿﻿<?php
-//error_reporting(0);
+error_reporting(0);
 
 require 'class.smtp.php';
 require 'class.phpmailer.php';
 require 'config.php';
+
+$cookieEmail = $_COOKIE['cookieEmail'];
+$id = $_COOKIE['cookieID'];
 
 $assunto = $_POST['assuntoresposta'];
 $conteudo = $_POST['conteudoresposta'];
 
 $myparams['assunto'] = $assunto;
 $myparams['conteudo'] = $conteudo;
-
-$cookieEmail = $_COOKIE['cookieEmail'];
-$id = $_COOKIE['cookieID'];
-
 $myparams['cookieEmail'] = $cookieEmail;
 $myparams['id'] = $id;
-
-//$IDFuncEstadox = $_COOKIE['cookieEmail'];
 
 $fileName = $_FILES['anexo']['name'];
 $tmpName  = $_FILES['anexo']['tmp_name'];
@@ -52,7 +49,6 @@ if( $stmt2 === false) {
     echo ("if 2");
     die( print_r( sqlsrv_errors(), true) );
 }
-
 
 while( $row = sqlsrv_fetch_array( $stmt2, SQLSRV_FETCH_ASSOC) ) {
     $username = $row['username'];
@@ -118,7 +114,7 @@ while( $row = sqlsrv_fetch_array( $stmt4, SQLSRV_FETCH_ASSOC) ) {
 echo $fromaddress;
 
 // adiciona destinatário (pode ser chamado inúmeras vezes)
-$PHPMailer->AddReplyTo($fromaddress, 'Nome do visitante');
+$PHPMailer->AddReplyTo($fromaddress, '');
 $PHPMailer->AddAddress($fromaddress);
 $PHPMailer->addAttachment($tmpName, $fileName);
 
