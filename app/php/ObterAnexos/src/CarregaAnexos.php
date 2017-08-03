@@ -2,7 +2,9 @@
 //error_reporting(0);
 include("config.php");
 $return_arr = array();
+
 $id = $_COOKIE['cookieID'];
+
 set_time_limit(3000);
 
 function mssql_escape($data) {
@@ -153,7 +155,7 @@ if($emails) {
                 if (empty($filename)) $filename = $attachment['filename'];
 
                 if (empty($filename)) $filename = time() . ".dat";
-                $folder = "";
+                $folder = "downloads";
                 if (!is_dir($folder)) {
                     mkdir($folder);
                 }
@@ -166,32 +168,65 @@ if($emails) {
                 fclose($fp);
                 $filename = quoted_printable_decode(imap_utf8($filename));
 
+                echo "</br>";echo "</br>";
+                echo "current localization: ";
+                echo("./". $folder ."/".$filename);
+                echo "</br>";echo "</br>";
 
 
-                $myparams['data'] = mssql_escape($data);
-                //$myparams['data'] = $data;
+                //echo"****";
+
+                $localizacao2= ("testetrackit-Sqlserver/app/php/ObterAnexos/src/".$folder."/");
+
+                //$localizacao= ("../".$folder."/.".$filename);
+                //echo $teste;
+                echo"****";
+
+                //$localizacao=("./". $folder ."/".$filename);
+                echo $localizacao2;
+                echo "</br>";
+
+                /*echo("nome do ficheiro : ");
+                echo $filename;
+                echo "</br>";
+                */
+
+                // $myparams['data'] = mssql_escape($data);
+                $myparams['data'] = $data;
+
                 $myparams['filename'] = $filename;
                 $myparams['id'] = $id;
-                echo "Chegou aqui";
+                $myparams['localizacao'] = $localizacao2;
+
+                //echo $id;
                 //echo $filename;
+
                 if ($quatro == 4) {
                     $myparams['data']= array($data, SQLSRV_PARAM_IN,
                         SQLSRV_PHPTYPE_STREAM(SQLSRV_ENC_BINARY), SQLSRV_SQLTYPE_VARBINARY('max'));
                 }
 
-                $sql = "INSERT INTO emails.upload ([content],[nome],[id_ticket]) SELECT CONVERT(VARBINARY(MAX),?),?,?";
+
+
+
+                $sql = "INSERT INTO emails.upload ([nome],[id_ticket],[localizacao]) values(?,?,?)"; // funciona
+
+
 
                 $parametri = array(
-                    array(&$myparams['data'], SQLSRV_PARAM_IN),
                     array(&$myparams['filename'], SQLSRV_PARAM_IN),
-                    array(&$myparams['id'], SQLSRV_PARAM_IN)
+                    //array(&$myparams['data'], SQLSRV_PARAM_IN), // tava decomentado
+                    array(&$myparams['id'], SQLSRV_PARAM_IN),
+                    array(&$myparams['localizacao'], SQLSRV_PARAM_IN)
                 );
 
-                //$sql = "INSERT INTO emails.upload(nome, content, id_ticket) VALUES ('$filename','.mssql_escape($data).','$id')";
+                //$sql = "INSERT INTO emails.upload ([content],[nome],[id_ticket]) SELECT CONVERT(VARBINARY(MAX),?),?,?"; //original , não insere nada na bd
 
-                $r_blob = sqlsrv_query($connection, $sql, $parametri);
-                echo "depois do query";
+                $r_blob = sqlsrv_prepare($connection, $sql ,$parametri);
+                $r_blob = sqlsrv_query($connection, $sql ,$parametri);
+
                 if ($r_blob === false) {
+                    echo "morreu";
                     die(print_r(sqlsrv_errors(), true));
                 }
             }
