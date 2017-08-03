@@ -19,6 +19,9 @@ die( print_r( sqlsrv_errors(), true) );
 
 while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
     $row_array['id'] = (string)$row['id'];
+
+    //nome
+    $row_array['nome'] = (string)$row['nome'];
     $row_array['id_ticket'] = (string)$row['id_ticket'];
     $row_array['localizacao'] = (string)$row['localizacao'];
     array_push($return_arr,$row_array);

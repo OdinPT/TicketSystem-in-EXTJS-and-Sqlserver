@@ -155,11 +155,13 @@ if($emails) {
                 if (empty($filename)) $filename = $attachment['filename'];
 
                 if (empty($filename)) $filename = time() . ".dat";
-                $folder = "downloads";
+                $filename = $id . "_" . $filename;
+                echo $filename;
+                $folder = "./downloads";
                 if (!is_dir($folder)) {
                     mkdir($folder);
                 }
-                $fp = fopen("./" . $folder . "/" . $filename, "w+");
+                $fp = fopen($folder . "/" . $filename, "w+");
                 fwrite($fp, $attachment['attachment']);
                 fclose($fp);
                 $fp = fopen($filename, 'r');
@@ -174,29 +176,11 @@ if($emails) {
                 echo "</br>";echo "</br>";
 
 
-                //echo"****";
-
-                $localizacao2= ("testetrackit-Sqlserver/app/php/ObterAnexos/src/".$folder."/");
-
-                //$localizacao= ("../".$folder."/.".$filename);
-                //echo $teste;
-                echo"****";
-
-                //$localizacao=("./". $folder ."/".$filename);
-                echo $localizacao2;
-                echo "</br>";
-
-                /*echo("nome do ficheiro : ");
-                echo $filename;
-                echo "</br>";
-                */
-
                 // $myparams['data'] = mssql_escape($data);
                 $myparams['data'] = $data;
-
                 $myparams['filename'] = $filename;
                 $myparams['id'] = $id;
-                $myparams['localizacao'] = $localizacao2;
+                $myparams['localizacao'] = $folder;
 
                 //echo $id;
                 //echo $filename;
