@@ -25,7 +25,7 @@ Ext.define('TrackIT.view.main.historico.ListaTicketsHistorico', {
         ptype: 'gridfilters'
     }],
     columns: [
-        {text: 'ID ',  dataIndex: 'id', flex: 0.4,filter: {
+        {text: 'ID ',  dataIndex: 'id', flex: 0.90,filter: {
             type: 'string'
         }},
         { text: 'Remetente',  dataIndex: 'fromaddress', flex: 1.6,

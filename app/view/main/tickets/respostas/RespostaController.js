@@ -20,8 +20,18 @@ Ext.define('TrackIT.view.main.tickets.respostas.RespostaController', {
                 url: 'app/php/Apagar/apagaresposta.php',
                 method: 'POST',
                 success: function (response, opts) {
-                    Ext.MessageBox.alert('title', 'Sucesso');
-                    Ext.getCmp('grid4').getStore().load();
+                    Ext.MessageBox.alert('Resposta Apagada', 'com Sucesso');
+
+
+                    function hide_message() {
+                        Ext.defer(function () {
+                            Ext.MessageBox.hide();
+                            Ext.getCmp('grid4').getStore().load();
+                        }, 1500);
+
+                    }
+                    hide_message();
+
                 }
             })
         },
@@ -30,8 +40,17 @@ Ext.define('TrackIT.view.main.tickets.respostas.RespostaController', {
             url: 'app/php/Apagar/apagarcoment.php',
             method: 'POST',
             success: function (response, opts) {
-                Ext.MessageBox.alert('title', 'Sucesso');
-                Ext.getCmp('gridhiscoment2historico').getStore().load();
+                Ext.MessageBox.alert('Comentário apagado ', 'com Sucesso');
+
+
+                function hide_message() {
+                    Ext.defer(function () {
+                        Ext.MessageBox.hide();
+                        Ext.getCmp('gridhiscoment2historico').getStore().load();
+                    }, 1500);
+
+                }
+                hide_message();
             }
         })
     },
@@ -43,15 +62,16 @@ Ext.define('TrackIT.view.main.tickets.respostas.RespostaController', {
                 success: function (response, opts) {
                     Ext.MessageBox.alert('Departamento Editado ', 'com Sucesso');
 
-                    //        function hide_message() {
-//                        Ext.defer(function () {
-//                            Ext.MessageBox.hide();
 
+                    function hide_message() {
+                        Ext.defer(function () {
+                            Ext.MessageBox.hide();
                             Ext.getCmp('gridhiscoment2').getStore().load();
-//                        }, 9100);
-//                    }
+                        }, 1500);
 
-//                    hide_message();
+                    }
+                    hide_message();
+
                 },
 
                 failure: function (){alert('Erro...');
@@ -68,23 +88,7 @@ Ext.define('TrackIT.view.main.tickets.respostas.RespostaController', {
             });
     },
 
-    /*
 
-    onClickApagarResposta: function()
-    {
-        myRequest1 = Ext.Ajax.request({
-            url: 'app/php/Apagar/apagaresposta.php',
-            method: 'POST',
-            success: function(response, opts) {
-                Ext.MessageBox.alert('Resposta apagada',' com Sucesso');
-                Ext.getCmp('grid5').getStore().load();
-            }
-        })
-    }
-
-
-
-     */
     listeners: {
         itemclick: function (view, record, item, index, e) {
             var id = record.get('id');

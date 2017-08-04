@@ -2,8 +2,9 @@
 include("config.php");
 //error_reporting('0');
 
-$id = $_COOKIE['cookieIDhistorico'];
-
+//$id = $_COOKIE['cookieIDhistorico'];
+//cookieIDanswer
+$id = $_COOKIE['cookieIDanswer'];
 $return_arr = array();
 
 $myparams['id'] = $id;

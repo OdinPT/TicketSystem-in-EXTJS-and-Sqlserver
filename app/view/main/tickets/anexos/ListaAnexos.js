@@ -36,7 +36,16 @@ Ext.define('TrackIT.view.main.tickets.anexos.ListaAnexos', {
                         method: 'POST',
                         success: function (response, opts) {
                             Ext.MessageBox.alert('anexos carregados', ' Com Sucesso');
-                            Ext.getCmp('gridanexos').getStore().load();
+                            function hide_message() {
+                                Ext.defer(function () {
+                                    Ext.MessageBox.hide();
+                                    Ext.getCmp('gridanexos').getStore().load();
+                                }, 1500);
+
+                            }
+                            hide_message();
+
+
                         }
                     })
                 }
