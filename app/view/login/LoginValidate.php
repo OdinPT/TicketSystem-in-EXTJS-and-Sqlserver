@@ -15,6 +15,7 @@ $url = "Login.js";
 
 $serverName = "FENIX\SQLNOTEWINDOWS10";
 $connectionInfo = array( "Database" => "TRAKTICKETSYS", "UID"=>"sa", "PWD"=>"1234" );
+
 $connection = sqlsrv_connect($serverName, $connectionInfo);
 
 if( $connection ) {

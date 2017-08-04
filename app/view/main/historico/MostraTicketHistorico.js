@@ -30,9 +30,9 @@ Ext.define('TrackIT.view.main.historico.MostraTicketHistorico', {
             {
                 xtype: 'mainlisthistoricocomenthistorico'
             },
-            {
+            /*{
                 xtype: 'mainlistanexoshistorico'
-            },
+            },*/
             {
                 xtype: 'mainlistrespostashistorico'
             }
