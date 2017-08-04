@@ -1,6 +1,8 @@
 <?php
-include_once("config.php");
 //error_reporting(0);
+//include_once("config.php");
+include "../config.php";
+
 //getting id from url
 $email = $_COOKIE['cookieEmail'];
 $myparams['username'] = $email;

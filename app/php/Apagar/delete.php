@@ -1,6 +1,7 @@
 <?php
 //including the database connection file
-include("config.php");
+//include("config.php");
+include "../config.php";
 $cookieEmail = $_COOKIE['cookieEmail'];
 $myparams['username'] = $cookieEmail;
 

@@ -1,10 +1,11 @@
 <?php
 //error_reporting(0);
-include("config.php");
+
+include "../config.php";
 
 $return_arr = array();
 $cookieEmail = $_COOKIE['cookieEmail'];
-//$cookieEmail = "callcenter";
+
 
 
 $sql = "SELECT id_departamento_funcionarios FROM emails.funcionario WHERE username='$cookieEmail'";

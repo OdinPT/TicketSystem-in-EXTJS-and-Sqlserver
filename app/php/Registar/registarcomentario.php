@@ -1,6 +1,7 @@
 <?php
 //error_reporting(0);
-include("config.php");
+//include("config.php");
+include "../config.php";
 
 $idTicket = $_COOKIE['cookieID'];
 $comentario = $_POST['comentario'];

@@ -1,7 +1,7 @@
 <?php
 //including the database connection file
-include("config.php");
-
+//include("config.php");
+include "../config.php";
 //getting id of the data from url
 $id = $_COOKIE['cookieIDhistorico'];
 $myparams['id'] = $id;

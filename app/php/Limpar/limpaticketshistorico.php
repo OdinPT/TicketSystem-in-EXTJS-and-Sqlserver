@@ -1,6 +1,6 @@
 <?php
 //including the database connection file
-include("config.php");
+include "../config.php";
 
 $sql = "{TRUNCATE TABLE historico}";
 

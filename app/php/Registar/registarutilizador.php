@@ -1,5 +1,6 @@
 <?php
-include("config.php");
+//include("config.php");
+include "../config.php";
 
 $username = $_POST['user'];
 $password = $_POST['pass'];

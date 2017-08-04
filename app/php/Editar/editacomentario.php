@@ -1,5 +1,6 @@
 <?php
-include("config.php");
+include "../config.php";
+
 error_reporting(0);
 
 $idUtilizador = $_COOKIE['cookieEmail'];

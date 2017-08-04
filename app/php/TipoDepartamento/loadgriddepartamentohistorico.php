@@ -1,6 +1,8 @@
 <?php
 //error_reporting(0);
-include("config.php");
+//include("config.php");
+include "../config.php";
+
 $id = $_COOKIE['cookieIDhistorico'];
 //echo $id;
 $myparams['id'] = $id;
