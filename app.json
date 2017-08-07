@@ -271,7 +271,11 @@
             "path": "${build.out.css.path}",
             "bundle": true,
             "exclude": ["fashion"]
-        }
+        },
+		{
+
+	"path":"resources/TrackIT-all_3.css"
+	}
     ],
 
     /**

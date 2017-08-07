@@ -13,8 +13,10 @@ $myparams['password'] = $password;
 
 $url = "Login.js";
 
-$serverName = "FENIX\SQLNOTEWINDOWS10";
-$connectionInfo = array( "Database" => "TRAKTICKETSYS", "UID"=>"sa", "PWD"=>"1234" );
+//$serverName = "FENIX\SQLNOTEWINDOWS10";
+//$connectionInfo = array( "Database" => "TRAKTICKETSYS", "UID"=>"sa", "PWD"=>"1234" );
+$serverName = "PC-SERVER-01";
+$connectionInfo = array( "Database" => "TRAKTICKETSYS", "UID"=>"trkguest", "PWD"=>"trkgu3st" );
 
 $connection = sqlsrv_connect($serverName, $connectionInfo);
 

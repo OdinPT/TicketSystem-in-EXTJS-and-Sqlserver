@@ -143,6 +143,7 @@ $row = sqlsrv_fetch_array($stmtx2);
 
 // mysqli_query($mysqli, "call InserirRespostas('$assunto', '$conteudo2','$id')");
 $myparams['conteudo2'] = $conteudo2;
+$myparams['conteudo2'] = $conteudo2;
 
 $paramx3 = array(
     array(&$myparams['assunto'], SQLSRV_PARAM_IN),
@@ -156,7 +157,7 @@ $sqlx3 = "{call emails.InserirRespostas(?,?,?)}";
 $stmtx3 = sqlsrv_prepare($connection, $sqlx3, $paramx3);
 
 if( sqlsrv_execute( $stmtx3 ) === false ) {
-    echo("ERro  INSERIR Respostas");
+    echo("Erro  INSERIR Respostas </br>");
     die( print_r( sqlsrv_errors(), true));
 }
 

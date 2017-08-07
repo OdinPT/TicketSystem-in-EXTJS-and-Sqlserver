@@ -1,11 +1,11 @@
 <?php
 error_reporting(0);
-//include("config.php");
-include "../config.php";
+include("config.php");
+//include "../config.php";
 $return_arr = array();
 
 $id = $_COOKIE['cookieID'];
-
+echo $id;
 set_time_limit(3000);
 
 function mssql_escape($data) {
@@ -46,6 +46,7 @@ $sql2 = "SELECT * FROM emails.funcionario WHERE Tipo_Funcionario='$quatro' AND i
 
 $stmt2 = sqlsrv_query( $connection, $sql2);
 if( $stmt2 === false) {
+    echo"morreu";
     die( print_r( sqlsrv_errors(), true) );
 }
 
