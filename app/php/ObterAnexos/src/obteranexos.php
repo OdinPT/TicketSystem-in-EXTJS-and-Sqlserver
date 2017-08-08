@@ -1,7 +1,7 @@
 <?php
-include_once 'config.php';
-//include "../config.php";
 error_reporting(0);
+include "../../config.php";
+
 $id = $_COOKIE['cookieIDanexo'];
 
 $sql = "SELECT * FROM emails.upload WHERE id='$id'";

@@ -2,7 +2,6 @@
 $hostname = '{imap.gmail.com:993/imap/ssl}INBOX';
 
 include "config.php";
-//include_once("config.php");
 //getting id from url
 
 $cookieEmail = $_COOKIE['cookieEmail'];
