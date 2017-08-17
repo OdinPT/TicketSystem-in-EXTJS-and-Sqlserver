@@ -1,11 +1,8 @@
 <?php
-//error_reporting(0);
-//include("config.php");
+error_reporting(0);
+
 include "../config.php";
 $id = $_COOKIE['cookieIDhistorico'];
-
-//$id=14;
-//echo $id;
 
 $return_arr = array();
 
@@ -23,7 +20,6 @@ if( sqlsrv_execute( $stmt ) === false ) {
     die( print_r( sqlsrv_errors(), true));
 }
 
-//$result = sqlsrv_query($mysqli, $query);
 
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)){
 

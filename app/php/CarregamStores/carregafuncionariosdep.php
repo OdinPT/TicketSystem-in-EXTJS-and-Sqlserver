@@ -1,7 +1,6 @@
 <?php
-//error_reporting(0);
-//include("config.php");
 include "../config.php";
+
 $funcionario = $_COOKIE['cookieEmail'];
 
 $return_arr = array();

@@ -1,8 +1,7 @@
 <?php
 
-//error_reporting('0');
+error_reporting('0');
 include "../config.php";
-//$id = $_COOKIE['cookieIDhistorico'];
 
 $id = $_COOKIE['cookieIDanswer'];
 $return_arr = array();

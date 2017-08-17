@@ -8,6 +8,7 @@ Ext.define('TrackIT.view.main.tickets.enviarespostas.FormEnviaRespostaController
         Ext.getCmp('fileuploadform').getForm().submit();
             myRequest1 = Ext.Ajax.request({
                 url: 'app/view/main/tickets/enviarespostas/EnviaMail/mandarmail.php',
+
                 success: function (response, opts) {
                     Ext.MessageBox.alert('Sucesso', 'Enviado!');
                 },

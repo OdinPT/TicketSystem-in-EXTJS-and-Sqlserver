@@ -2,7 +2,10 @@
 error_reporting(0);
 require 'class.smtp.php';
 require 'class.phpmailer.php';
-require 'config.php';
+
+include "../../../../../php/config.php";
+
+//require 'config.php';
 
 $cookieEmail = $_COOKIE['cookieEmail'];
 $id = $_COOKIE['cookieID'];

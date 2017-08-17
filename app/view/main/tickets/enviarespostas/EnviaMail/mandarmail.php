@@ -1,7 +1,7 @@
 ﻿﻿<?php
 error_reporting(0);
 
-require 'config.php';
+include "../../../../../php/config.php";
 
 require 'class.smtp.php';
 require 'class.phpmailer.php';
