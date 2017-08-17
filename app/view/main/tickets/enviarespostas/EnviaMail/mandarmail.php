@@ -1,9 +1,11 @@
 ﻿﻿<?php
 error_reporting(0);
 
+require 'config.php';
+
 require 'class.smtp.php';
 require 'class.phpmailer.php';
-require 'config.php';
+
 
 $cookieEmail = $_COOKIE['cookieEmail'];
 $id = $_COOKIE['cookieID'];
@@ -94,9 +96,6 @@ $PHPMailer->Body = $conteudo;
 $PHPMailer->AltBody = 'Mensagem em texto';
 $cookieID = $_COOKIE['cookieID'];
 
-//selecting data associated with this particular id
-//$result = mysqli_query($mysqli, "SELECT * FROM emails WHERE id='$cookieID'") or die(mysqli_error($mysqli));
-
 $sql4 = "SELECT * FROM emails.emails WHERE id='$cookieID'";
 
 
@@ -109,19 +108,16 @@ if( $stmt4 === false) {
 }
 
 while( $row = sqlsrv_fetch_array( $stmt4, SQLSRV_FETCH_ASSOC) ) {
-    $fromaddress = $row['email'];
+    $fromaddress = $row['fromaddress'];
 }
-echo $fromaddress;
+//echo $fromaddress;
 
 // adiciona destinatário (pode ser chamado inúmeras vezes)
 $PHPMailer->AddReplyTo($fromaddress, '');
 $PHPMailer->AddAddress($fromaddress);
 $PHPMailer->addAttachment($tmpName, $fileName);
 
-//sqlsrv_query($mysqli, "call InserirRespostas('$assunto', '$conteudo2','$id')");
 $myparams['conteudo'] = $conteudo;
-
-    //sqlsrv_query($mysqli, "call inserirhistoricoestados('$id',2,'$cookieEmail')");
 
 $dois=2;
 $myparams['dois'] = $dois;
@@ -157,22 +153,22 @@ $sqlx3 = "{call emails.InserirRespostas(?,?,?)}";
 $stmtx3 = sqlsrv_prepare($connection, $sqlx3, $paramx3);
 
 if( sqlsrv_execute( $stmtx3 ) === false ) {
-    echo("Erro  INSERIR Respostas </br>");
     die( print_r( sqlsrv_errors(), true));
 }
 
 $row = sqlsrv_fetch_array($stmtx3);
 
-//mysqli_query($mysqli, "call inserirhistoricoestados('$id',2,'$cookieEmail')");
+
+
 // verifica se enviou corretamente
 
 if ( $PHPMailer->Send())
 {
-echo "Enviado com sucesso";
+    echo "Enviado com sucesso";
 }
 else
 {
-echo 'Erro do PHPMailer: ' . $PHPMailer->ErrorInfo;
+    echo 'Erro do PHPMailer: ' . $PHPMailer->ErrorInfo;
 }
 
 ?>

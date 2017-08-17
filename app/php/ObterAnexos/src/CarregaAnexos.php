@@ -6,7 +6,7 @@ $return_arr = array();
 
 $id = $_COOKIE['cookieID'];
 echo $id;
-set_time_limit(3000);
+set_time_limit(6000);
 
 function mssql_escape($data) {
     if(is_numeric($data))
