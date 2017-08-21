@@ -32,7 +32,7 @@ Ext.define('TrackIT.view.main.historico.HisComentHistorico.MostraComent', {
         {
             xtype: 'textfield',
             fieldLabel: 'ID Comentario:',
-            id: 'ID_Comentario',
+            id: 'ID_Comentário',
             hidden:true,
             readOnly:true
         },
@@ -45,7 +45,7 @@ Ext.define('TrackIT.view.main.historico.HisComentHistorico.MostraComent', {
         {
             xtype: 'textfield',
             fieldLabel: 'Data :',
-            id: 'Data_comentario',
+            id: 'Data_comentário',
             readOnly:true
         },
         {
