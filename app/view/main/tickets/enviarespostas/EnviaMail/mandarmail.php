@@ -170,5 +170,4 @@ else
 {
     echo 'Erro do PHPMailer: ' . $PHPMailer->ErrorInfo;
 }
-
 ?>
