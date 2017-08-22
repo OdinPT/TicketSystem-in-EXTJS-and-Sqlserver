@@ -8,19 +8,6 @@ $IDFuncEstadox = $_COOKIE['cookieEmail'];
 $myparams['id'] = $id;
 $myparams['IDFuncEstadox'] = $IDFuncEstadox;
 
-echo("id: ");
-echo $id;
-echo("</br>");
-echo("Estado: ");
-echo $state;
-echo("</br>");
-echo $IDFuncEstadox;
-echo("</br>");
-echo("Funcionario atribuido: ");
-echo $func;
-echo("</br>");
-
-
 $sql = "SELECT * FROM emails.emails WHERE id='$id'";
 
 $stmt = sqlsrv_query( $connection, $sql );
@@ -232,6 +219,12 @@ if($state == 5)
             {
                  echo "Sucesso";
              }
+        else if ($tipo == 1 || $tipo==4 and $func != $IDFuncEstadox)
+        {
+            header("HTTP/1.0 404 Not Found");
+            header('HTTP', true, 500);
+
+        }
      else if($state != 3 && $state != 4)
      {
          //$insere = mysqli_query($mysqli, "UPDATE emails SET state=3 WHERE id='$id'");

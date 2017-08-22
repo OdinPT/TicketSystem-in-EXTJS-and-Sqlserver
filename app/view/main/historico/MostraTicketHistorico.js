@@ -30,9 +30,7 @@ Ext.define('TrackIT.view.main.historico.MostraTicketHistorico', {
             {
                 xtype: 'mainlisthistoricocomenthistorico'
             },
-            /*{
-                xtype: 'mainlistanexoshistorico'
-            },*/
+
             {
                 xtype: 'mainlistrespostashistorico'
             }
@@ -40,7 +38,7 @@ Ext.define('TrackIT.view.main.historico.MostraTicketHistorico', {
         ]
     },
         {
-            title: 'Historico dos Estados',
+            title: 'Histórico dos Estados',
             items: [
                 {
                     xtype: 'mainlisthistoricoesthist'
@@ -50,7 +48,7 @@ Ext.define('TrackIT.view.main.historico.MostraTicketHistorico', {
         },
 
         {
-            title: 'Historico dos Departamentos 2',
+            title: 'Histórico dos Departamentos 2',
             items: [
                 {
                     xtype: 'mainlisthistoricoDep'
@@ -59,7 +57,7 @@ Ext.define('TrackIT.view.main.historico.MostraTicketHistorico', {
 
         },
         {
-            title: 'Historico Atribuição',
+            title: 'Histórico Atribuição',
             items: [
                 {
                     xtype: 'mainlisthistoricoatribuicahis'

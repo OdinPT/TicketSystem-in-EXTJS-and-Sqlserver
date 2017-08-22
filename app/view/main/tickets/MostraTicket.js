@@ -56,7 +56,7 @@ Ext.define('TrackIT.view.main.tickets.MostraTicket', {
 
         },
         {
-            title: 'Historico dos Departamentos',
+            title: 'Histórico dos Departamentos',
             items: [
                 {
                     xtype: 'mainlisthistoricoDep'
